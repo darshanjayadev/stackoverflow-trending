@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { IonList, IonListHeader, IonLabel, IonItem, IonBadge } from '@ionic/react';
+import QuestionListCard from './QuestionListCard';
 import './SFContent.css';
 
 const SFContent = () => {
@@ -11,13 +13,27 @@ const SFContent = () => {
     const response = await fetch(`${apiURL}&page=${pageCount}`).then(res => res.json());
     setPageCount(pageCount + 1);
     setData(data.concat(response.items));
-    // console.log(data);
 }
+
+  const questionList = data.map((questionData, index) => (
+    <QuestionListCard data = {questionData} key={index}/>
+    //Using index as key isn't a good idea but the question_id which I think should be unique seems to have duplicates, and I'm running out of time
+  ));
 
   return (
   <section>
     <button onClick={fetchData}>Fetch Data</button>
-    <div>Total questions loaded = {data.length}</div>
+    <IonList>
+      <IonListHeader lines="inset">
+        <IonLabel color="secondary">Hot Questions</IonLabel>
+      </IonListHeader>
+      <IonItem>
+          <IonLabel>Questions loaded</IonLabel>
+          <IonBadge slot="end">{data.length}</IonBadge>
+        </IonItem>
+      {data.length > 0 ? questionList : null}
+    </IonList>
+
   </section>
 );
 }
