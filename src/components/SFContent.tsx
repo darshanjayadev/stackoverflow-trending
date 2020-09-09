@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonList, IonListHeader, IonLabel, IonItem, IonBadge } from '@ionic/react';
 import QuestionListCard from './QuestionListCard';
 import './SFContent.css';
@@ -10,7 +10,9 @@ const SFContent = () => {
   const fetchData = async () => {
     const apiURL = 'https://api.stackexchange.com/2.2/questions?order=desc&sort=hot&site=stackoverflow';
 
-    const response = await fetch(`${apiURL}&page=${pageCount}`).then(res => res.json());
+    const response = await fetch(`${apiURL}&page=${pageCount}`)
+    .then(res => res.json())
+    .catch(err => console.log(err));
     setPageCount(pageCount + 1);
     setData(data.concat(response.items));
 }
@@ -33,7 +35,6 @@ const SFContent = () => {
         </IonItem>
       {data.length > 0 ? questionList : null}
     </IonList>
-
   </section>
 );
 }
