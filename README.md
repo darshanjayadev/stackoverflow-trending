@@ -1,3 +1,3 @@
-# StudyMonk Fullstack Challenge
+# Stackoverflow Trending
 
 Work in progress
