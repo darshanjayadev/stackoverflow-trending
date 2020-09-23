@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { IonList, IonListHeader, IonLabel, IonItem, IonBadge } from '@ionic/react';
 import QuestionListCard from './QuestionListCard';
 import './SFContent.css';
